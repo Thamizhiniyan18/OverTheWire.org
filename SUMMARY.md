@@ -1,4 +1,4 @@
 # Table of contents
 
-* [OverTheWire.org](README.md)
+* [OverTheWire Writeups](README.md)
 * [Natas](natas.md)
