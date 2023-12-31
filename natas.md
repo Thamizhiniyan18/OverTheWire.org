@@ -10,7 +10,7 @@ URL:      http://natas0.natas.labs.overthewire.org
 
 You can find the password for next level in the page source code.
 
-<figure><img src=".gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (11) (1).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -26,7 +26,7 @@ In this challenge also, you can find the password for the next level in the page
 
 So you can use the `Ctrl + shift + i` shortcut to access the Dev-Tools Inspect element tab or the `Ctrl + u` shortcut to open the page source code to get the flag.
 
-<figure><img src=".gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (13) (1).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -196,13 +196,13 @@ URL:      http://natas8.natas.labs.overthewire.org
 
 This time also the website welcomed me with a input requesting for secret key and also there was a link to the source code of the logic behind the secret key validation.
 
-<figure><img src=".gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 This time the secret key was encoded and the function/algorithm that is used to encode the secret key was given.&#x20;
 
-<figure><img src=".gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src=".gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Let's breakdown the above function into steps:
 
@@ -220,11 +220,11 @@ The above decoding steps can be performed with CyberChef.
 
 CyberChef has a handy URL scheme that preserves data and operations, so I can link directly to the solution: [https://gchq.github.io/CyberChef/#recipe=From\_Hex('None')Reverse('Character')From\_Base64('A-Za-z0-9%2B/%3D',true,false)\&input=M2QzZDUxNjM0Mzc0NmQ0ZDZkNmMzMTU2Njk1NjMzNjI](https://gchq.github.io/CyberChef/#recipe=From\_Hex\('None'\)Reverse\('Character'\)From\_Base64\('A-Za-z0-9%2B/%3D',true,false\)\&input=M2QzZDUxNjM0Mzc0NmQ0ZDZkNmMzMTU2Njk1NjMzNjI)
 
-<figure><img src=".gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 On giving the decoded string as the input, got the password for the next level.
 
-<figure><img src=".gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (10) (1).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -293,7 +293,7 @@ where:
 
 Direct link to solution: [http://natas10.natas.labs.overthewire.org/?needle=+%22%22+%2Fetc%2Fnatas\_webpass%2Fnatas11+%23\&submit=Search](http://natas10.natas.labs.overthewire.org/?needle=+%22%22+%2Fetc%2Fnatas\_webpass%2Fnatas11+%23\&submit=Search)
 
-<figure><img src=".gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -865,19 +865,19 @@ URL:      http://natas18.natas.labs.overthewire.org
 
 This time we got a login page and also a link to the source code. And its mentioned that, we have to login as the admin to get the password for next level.
 
-<figure><img src=".gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 On checking the source code. we can see the `maxid` variable, which defines the maximum number of users, in this case `640` users, and also you can see that the function my\_session\_start looks out for a session cookie named `PHPSESSID`.
 
-<figure><img src=".gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 Let's try to login with some random credentials. The application responded that "You are logged in as a regular user. Login as an admin to retrieve credentials for `natas19`".
 
-<figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
 
 I captured the request of the above login attempt with burpsuite. On checking it, the response to the logic request responded back with a cookie `PHPSESSID=184`.
 
-<figure><img src=".gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 So I decided to brute force this cookie value to find the id of the admin. For that, first I created a word list that contains all the possible user id's ( since we know the maximum number of users is `640` ).
 
@@ -912,11 +912,11 @@ ffuf -w 640.txt:FUZZ \
 
 From the result of above `ffuf` command, we can see that `119` was the only id that didn't had the line "You are logged in as a regular user." in its response.
 
-<figure><img src=".gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 So I tried to login with a session id of `119`, it worked and got the password for the next level.
 
-<figure><img src=".gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -999,4 +999,134 @@ Now let's replace the session id with the id we found using ffuf and refresh the
 Username: natas20
 Password: guVaZ3ET35LbgbFMoaN5tFcYT1jEP7UH
 URL:      http://natas20.natas.labs.overthewire.org
+```
+
+This time we got an input field requesting for a name and a link to the source code. And its mentioned that, we have to login as admin to get the credentials for the next level.
+
+<figure><img src=".gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+Let's take a look at the source code and break it down.
+
+<div>
+
+<figure><img src=".gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+ 
+
+<figure><img src=".gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+</div>
+
+The `debug` function prints messages that is passed to it, if there is parameter named `debug` in the  URL, i.e., [http://natas20.natas.labs.overthewire.org/?debug](http://natas20.natas.labs.overthewire.org/?debug).
+
+<figure><img src=".gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
+Next, let's take a look at the `print_credentials` function.&#x20;
+
+<figure><img src=".gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+
+The `print_credentials` function checks whether the key named `admin` exists in the array `$_SESSION` and if it exists, it also checks whether the value of the key `admin` is eqaul to 1.
+
+If both of the above mentioned checks are passed, then it prints the credentials for the next level in the predefined format.
+
+There are a few functions, which we can skip, since all of those functions just returns true.
+
+<div align="center" data-full-width="false">
+
+<figure><img src=".gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+
+ 
+
+<figure><img src=".gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+
+</div>
+
+Before taking look at the `myread` function, let's take a look at the `mywrite` function.
+
+The `mywrite` function, takes in two parameters, `$id` ( session id ) and `$data` ( name ). It first checks whether the given session id is valid and next it generates the `$filename`. It stores the data in the form of `"$key $value\n"` in a file in the path `$filename`.
+
+<figure><img src=".gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+
+Next lets take a look at the `myread` function, which takes in the `$sid` as the parameter and checks whether the its a valid id and then generates a filename of format `/mysess_<$sid>`.
+
+Then it reads the the contents of the filename that is generated above and stores it in a variable `$data`. Then it loops through each line of the variable `$data` and sets them as session variables. This `foreach` loop is vulenrable, since there is no proper input sanitization in the `mywrite`  function, which writes the data to the file.
+
+<figure><img src=".gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+
+Let's break down the vulnerable `foreach` loop.
+
+<figure><img src=".gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+
+It uses the php `explode` function, which splits the given data based on the mentioned parameter, in this the parameter is `"\n"`. Then again it uses the same `explode` function for each iteration , which splits the data in the `$line` variable based on the parameter `" "`, which is then added to $\_SESSION as session variables.
+
+For example, lets consider that the data in the file is `"name someone\nadmin 1"` and later retrieved and stored in the variable `$data = "name someone\nadmin 1"`. If the vulnerable `foreach` loop process this data, the variables that would be added to the session is:
+
+```json
+### The data won't be in the form of JSON. ###
+### I have shown in JSON for easy understanding. ###
+{
+    "name": "someone",
+    "admin": 1
+}
+```
+
+Now we have explored all the functions in the source code. Now let's try leverage the vulnerability we found. When we try to change the name, for the first time after the new session is created, we can see that it first checks for the session file and if it doesn't exists it writes the name that we give as input to the file using the `mywrite` function as `"name <input>\n"`
+
+<figure><img src=".gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+
+Since there is no input validation, we can give the input as `'someone\nadmin 1'`, which will be read by the `myread` function as:
+
+```json
+### The data won't be in the form of JSON. ###
+### I have shown in JSON for easy understanding. ###
+{
+    "name": "someone",
+    "admin": 1
+}
+```
+
+And since the data got the `admin: 1` value, for the next GET request to page with the same session id, the `print_credentials` function consider us as admin and will show the credentials.
+
+To get the credentials, you can use the following python script which will extract the credentials for the next level from subsequent requests using the same session.
+
+{% code lineNumbers="true" %}
+```python
+import requests
+from requests.auth import HTTPBasicAuth
+import re
+
+session = requests.Session()
+
+url = "http://natas20.natas.labs.overthewire.org/?debug"
+username = "natas20"
+password = "guVaZ3ET35LbgbFMoaN5tFcYT1jEP7UH"
+
+session.post(
+    url,
+    data={"name": 'someone\nadmin 1'},
+    auth=HTTPBasicAuth(username, password),
+)
+
+response = session.get(
+    url,
+    auth=HTTPBasicAuth(username, password),
+)
+
+print(re.findall(r'Username:\snatas21', response.text)[0])
+print(re.findall(r'Password:\s[A-Za-z\d]{32}', response.text)[0])
+```
+{% endcode %}
+
+From running the above script, we got the credentials for the next level.
+
+<figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+***
+
+## Level 20 - Level 21
+
+```
+Username: natas21
+Password: 89OWrTkGmiLZLv12JY4tLj2c4FW0xn56
+URL:      http://natas21.natas.labs.overthewire.org
 ```
