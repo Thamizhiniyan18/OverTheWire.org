@@ -196,11 +196,11 @@ URL:      http://natas8.natas.labs.overthewire.org
 
 This time also the website welcomed me with a input requesting for secret key and also there was a link to the source code of the logic behind the secret key validation.
 
-<figure><img src=".gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 This time the secret key was encoded and the function/algorithm that is used to encode the secret key was given.&#x20;
 
-<figure><img src=".gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src=".gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
@@ -293,7 +293,7 @@ where:
 
 Direct link to solution: [http://natas10.natas.labs.overthewire.org/?needle=+%22%22+%2Fetc%2Fnatas\_webpass%2Fnatas11+%23\&submit=Search](http://natas10.natas.labs.overthewire.org/?needle=+%22%22+%2Fetc%2Fnatas\_webpass%2Fnatas11+%23\&submit=Search)
 
-<figure><img src=".gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -865,11 +865,11 @@ URL:      http://natas18.natas.labs.overthewire.org
 
 This time we got a login page and also a link to the source code. And its mentioned that, we have to login as the admin to get the password for next level.
 
-<figure><img src=".gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 On checking the source code. we can see the `maxid` variable, which defines the maximum number of users, in this case `640` users, and also you can see that the function my\_session\_start looks out for a session cookie named `PHPSESSID`.
 
-<figure><img src=".gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Let's try to login with some random credentials. The application responded that "You are logged in as a regular user. Login as an admin to retrieve credentials for `natas19`".
 
@@ -1003,17 +1003,17 @@ URL:      http://natas20.natas.labs.overthewire.org
 
 This time we got an input field requesting for a name and a link to the source code. And its mentioned that, we have to login as admin to get the credentials for the next level.
 
-<figure><img src=".gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Let's take a look at the source code and break it down.
 
 <div>
 
-<figure><img src=".gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
  
 
-<figure><img src=".gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -1119,7 +1119,7 @@ print(re.findall(r'Password:\s[A-Za-z\d]{32}', response.text)[0])
 
 From running the above script, we got the credentials for the next level.
 
-<figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -1207,3 +1207,28 @@ Password: qjA8cOoKFTzJhtV0Fzvt92fgvxVnVRBj
 URL:      http://natas23.natas.labs.overthewire.org
 ```
 
+This we got an input requesting for a password and a link to the source code.
+
+<figure><img src=".gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+Let's take a look at the source code. The application is looking out for the URL parameter `passwd`, if it exists it checks whether it contains the substring `iloveyou` and also it checks whether the numerical value of `passwd` is greater than 10. If both of the conditions are statisfied, it shows the credentials for the next level.
+
+<figure><img src=".gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+The condition `$_REQUEST["passwd"] > 10` involves comparing a string to an integer. In PHP, when such a comparison occurs using the `greater than (>)` operator, PHP attempts to convert the string to a number. If the string begins with a valid numeric value, it undergoes conversion; otherwise, it is treated as `0`.
+
+For example, if `$_REQUEST["passwd"]` is set to `"iloveyou123"`, the string `"iloveyou123"` will be converted to `0` when compared to `10`. Consequently, the condition evaluates as `false`.
+
+To satisfy both the condition `$_REQUEST["passwd"] > 10` and the additional condition `strstr($_REQUEST["passwd"], "iloveyou")`, you can create a password that starts with a numeric value greater than `10`. For instance, a password like `"11iloveyou"` meets these conditions. When comparing this password to `10`, PHP converts it to the numeric value `11`. As a result, the condition `$_REQUEST["passwd"] > 10` evaluates to `true`. Additionally, the password contains the substring `"iloveyou,"` fulfilling the requirements for both conditions and granting access to the credentials for the next level.
+
+<figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+***
+
+## Level 23 - Level 24
+
+```
+Username: natas24
+Password: 0xzF30T9Av8lgXhW7slhFCIsVKAPyl2r
+URL:      http://natas24.natas.labs.overthewire.org
+```
