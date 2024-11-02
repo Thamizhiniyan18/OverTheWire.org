@@ -10,7 +10,7 @@ URL:      http://natas18.natas.labs.overthewire.org
 
 This time we got a login page and also a link to the source code. And its mentioned that, we have to login as the admin to get the password for next level.
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (26).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -18,15 +18,15 @@ This time we got a login page and also a link to the source code. And its mentio
 
 On checking the source code. we can see the `maxid` variable, which defines the maximum number of users, in this case `640` users, and also you can see that the function my\_session\_start looks out for a session cookie named `PHPSESSID`.
 
-<figure><img src="../.gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (27).png" alt=""><figcaption></figcaption></figure>
 
 Let's try to login with some random credentials. The application responded that "You are logged in as a regular user. Login as an admin to retrieve credentials for `natas19`".
 
-<figure><img src="../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (25).png" alt=""><figcaption></figcaption></figure>
 
 I captured the request of the above login attempt with burpsuite. On checking it, the response to the logic request responded back with a cookie `PHPSESSID=184`.
 
-<figure><img src="../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (31).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -65,8 +65,8 @@ ffuf -w 640.txt:FUZZ \
 
 From the result of above `ffuf` command, we can see that `119` was the only id that didn't had the line "You are logged in as a regular user." in its response.
 
-<figure><img src="../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (29).png" alt=""><figcaption></figcaption></figure>
 
 So I tried to login with a session id of `119`, it worked and got the password for the next level.
 
-<figure><img src="../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (30).png" alt=""><figcaption></figcaption></figure>

@@ -149,7 +149,7 @@ The following python script generates such a payload.
 print("natas28" + "%00" * (64 - len("natas28")) + "someone")
 ```
 
-<figure><img src="../.gitbook/assets/image (152).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (184).png" alt=""><figcaption></figcaption></figure>
 
 {% code overflow="wrap" %}
 ```url

@@ -10,11 +10,11 @@ URL:      http://natas19.natas.labs.overthewire.org
 
 This time we got the same login page that we got in the last level and its clearly mentioned that the source code is almost same, but the session id's will be random.
 
-<figure><img src="../.gitbook/assets/image (110).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (142).png" alt=""><figcaption></figcaption></figure>
 
 Let's first get the session id by trying to login with some random credentials.
 
-<figure><img src="../.gitbook/assets/image (112).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (144).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -22,7 +22,7 @@ Let's first get the session id by trying to login with some random credentials.
 
 The session id we got was some random encoded string. I tried to decode the session id's by some basic encoding schemes in cyber chef and was able to decode the string using `From Hex` scheme.
 
-<figure><img src="../.gitbook/assets/image (111).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (143).png" alt=""><figcaption></figcaption></figure>
 
 The string that we got after decoding is `<id>-admin`.&#x20;
 
@@ -46,7 +46,7 @@ wordlist.close()
 
 Now we have successfully generated the word list by executing the above python script.
 
-<figure><img src="../.gitbook/assets/image (107).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (139).png" alt=""><figcaption></figcaption></figure>
 
 Now its time to use ffuf to brute-force the session id's.
 
@@ -75,7 +75,7 @@ ffuf -w hex_640.txt:FUZZ \
 
 From the results of `ffuf`, we can get the valid admin cookie.
 
-<figure><img src="../.gitbook/assets/image (109).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (141).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -83,4 +83,4 @@ From the results of `ffuf`, we can get the valid admin cookie.
 
 Now let's replace the session id with the id we found using ffuf and refresh the page to get the credentials for next level.
 
-<figure><img src="../.gitbook/assets/image (108).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (140).png" alt=""><figcaption></figcaption></figure>

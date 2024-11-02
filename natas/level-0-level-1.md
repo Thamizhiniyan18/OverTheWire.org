@@ -10,4 +10,4 @@ In this challenge also, you can find the password for the next level in the page
 
 So you can use the `Ctrl + shift + i` shortcut to access the Dev-Tools Inspect element tab or the `Ctrl + u` shortcut to open the page source code to get the flag.
 
-<figure><img src="../.gitbook/assets/image (13) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (45).png" alt=""><figcaption></figcaption></figure>

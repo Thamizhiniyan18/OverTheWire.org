@@ -10,7 +10,7 @@ URL:      http://natas23.natas.labs.overthewire.org
 
 This we got an input requesting for a password and a link to the source code.
 
-<figure><img src="../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -18,7 +18,7 @@ This we got an input requesting for a password and a link to the source code.
 
 Let's take a look at the source code. The application is looking out for the URL parameter `passwd`, if it exists it checks whether it contains the substring `iloveyou` and also it checks whether the numerical value of `passwd` is greater than 10. If both of the conditions are statisfied, it shows the credentials for the next level.
 
-<figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
 The condition `$_REQUEST["passwd"] > 10` involves comparing a string to an integer. In PHP, when such a comparison occurs using the `greater than (>)` operator, PHP attempts to convert the string to a number. If the string begins with a valid numeric value, it undergoes conversion; otherwise, it is treated as `0`.
 

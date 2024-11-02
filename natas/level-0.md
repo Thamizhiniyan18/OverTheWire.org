@@ -8,4 +8,4 @@ URL:      http://natas0.natas.labs.overthewire.org
 
 You can find the password for next level in the page source code.
 
-<figure><img src="../.gitbook/assets/image (11) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (43).png" alt=""><figcaption></figcaption></figure>

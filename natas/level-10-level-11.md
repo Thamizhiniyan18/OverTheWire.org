@@ -10,7 +10,7 @@ URL:      http://natas11.natas.labs.overthewire.org
 
 This time we have got cookies that are encrypted with XOR scheme.
 
-<figure><img src="../.gitbook/assets/image (47).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (79).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -18,11 +18,11 @@ This time we have got cookies that are encrypted with XOR scheme.
 
 The source code had the php logic that performed the XOR encryption.
 
-<figure><img src="../.gitbook/assets/image (48).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (80).png" alt=""><figcaption></figcaption></figure>
 
 Let's first breakdown, how the default cookie data is encrypted:
 
-<figure><img src="../.gitbook/assets/image (51).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (83).png" alt=""><figcaption></figcaption></figure>
 
 1. The data is first converted to json format.
 2. Next the data is encrypted using the XOR encryption by passing it to the `xor_encrypt` function.
@@ -49,7 +49,7 @@ From the above conclusions, since we know the default data, which is encrypted a
 
 We can get the default data from the source code.
 
-<figure><img src="../.gitbook/assets/image (52).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (84).png" alt=""><figcaption></figcaption></figure>
 
 The data given in the source code has to be converted to JSON format:
 
@@ -62,7 +62,7 @@ The data given in the source code has to be converted to JSON format:
 
 Next, we can get the cookie from the browser dev tools application tab:
 
-<figure><img src="../.gitbook/assets/image (53).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (85).png" alt=""><figcaption></figcaption></figure>
 
 Now we have got all the necessary data. The following php code utilizes the `xor_encrypt` function that we got from the source code to perform the XOR operation on the given data.
 
@@ -90,7 +90,7 @@ From the output of the above code, we can see that the string `KNHL` is repeated
 
 Now we got the key. According to the source code, the password is shown if the value of `showpassword` is equal to `yes`.
 
-<figure><img src="../.gitbook/assets/image (55).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (87).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -122,4 +122,4 @@ So, let's create a cookie with the value of `showpassword` as `yes`. The followi
 
 Now we got the modified cookie, its time to grab the password. Update the cookie in the browser dev tools application tab and refresh the page.
 
-<figure><img src="../.gitbook/assets/image (49).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (81).png" alt=""><figcaption></figcaption></figure>

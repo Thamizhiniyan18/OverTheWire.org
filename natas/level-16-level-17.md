@@ -10,7 +10,7 @@ URL:      http://natas17.natas.labs.overthewire.org
 
 Again, we got an input field with a link to the source code.
 
-<figure><img src="../.gitbook/assets/image (101).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (133).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -18,11 +18,11 @@ Again, we got an input field with a link to the source code.
 
 Form taking a look at the source code we can see that the query is vulnerable to SQL injection.
 
-<figure><img src="../.gitbook/assets/image (102).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (134).png" alt=""><figcaption></figcaption></figure>
 
 But all the errors that are to be thrown due to the SQL injection payloads are commented out.
 
-<figure><img src="../.gitbook/assets/image (103).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (135).png" alt=""><figcaption></figcaption></figure>
 
 So we can't perform error based or boolean based SQL Injection.
 
@@ -38,7 +38,7 @@ natas18" AND sleep(5) #
 
 You can see that the browser responded with no errors after 5 seconds.
 
-<figure><img src="../.gitbook/assets/image (105).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (137).png" alt=""><figcaption></figcaption></figure>
 
 Now, we have confirmed that there is user named `natas18`. Now we have to retrieve the password for  that particular user. To do that we are going to brute force with alphanumerice letters, trying to match the password string, like we did in the last level using regexp, but this time we are going to make use of the SQL operator LIKE.
 
@@ -86,7 +86,7 @@ print("Password: ", password)
 
 The above script responded with the following output, from which we have found the first letter of the password.&#x20;
 
-<figure><img src="../.gitbook/assets/image (106).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (138).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -131,4 +131,4 @@ while len(password) < 32:
 
 The password for the next level has been obtained from the output of the above script.
 
-<figure><img src="../.gitbook/assets/image (104).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (136).png" alt=""><figcaption></figcaption></figure>

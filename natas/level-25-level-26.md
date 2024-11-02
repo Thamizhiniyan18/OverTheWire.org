@@ -10,7 +10,7 @@ URL:      http://natas26.natas.labs.overthewire.org
 
 This time we got page with four inputs and a link to the source code.
 
-<figure><img src="../.gitbook/assets/image (151).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (183).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -20,13 +20,13 @@ Let's take a look at the source code.
 
 There is class `Logger`, which basically logs the message to the defined `logFile`.
 
-<figure><img src="../.gitbook/assets/image (145).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (177).png" alt=""><figcaption></figcaption></figure>
 
 I checked the entire source code, but there is no object is created with the class Logger, its not used anywhere.
 
 Next, `the showImage()` function, simply shows the image file. The `drawImage()` function, creates an image witht the data from the `drawFromUserdata()` function.
 
-<figure><img src="../.gitbook/assets/image (146).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (178).png" alt=""><figcaption></figcaption></figure>
 
 The `drawFromUserdata()` function, first checks for the URL parameters x1, x2, y1, y2 and if it exists it generates the image. Next it checks out whether the cookie `drawing` exists, and if so, it base64 decodes the cookie `drawing` and `unserialize` the contents and generate the image using the contents that is decoded. Usage of PHP `unserialize` function on a cookie value is vulnerable, since the cookie can be modified by the user, and if the cookie contains php code snippets, it will be executed. To know more check the following resource:
 
@@ -34,7 +34,7 @@ The `drawFromUserdata()` function, first checks for the URL parameters x1, x2, y
 
 The `storeData()` function also utilizes the  PHP `unserialize` function, to read the cookie if present and set's the cookie.
 
-<figure><img src="../.gitbook/assets/image (147).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (179).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -46,7 +46,7 @@ We can leverage the above mentioned vulnerability to get the password for the ne
 
 If we are gonna get and store the password in a file, we have to make sure that its publicly accessible. So we have to store the output file in a location that we could access.&#x20;
 
-<figure><img src="../.gitbook/assets/image (148).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (180).png" alt=""><figcaption></figcaption></figure>
 
 From the source code we can see that the image files are located at `img` directory, which is publicly accessible. So we can make use of this directory. I copied the `Logger()` class and created a php script which will create a object with the `Logger()` class, `serialize` it and encode it using base64.
 
@@ -103,10 +103,10 @@ Tzo2OiJMb2dnZXIiOjM6e3M6MTU6IgBMb2dnZXIAbG9nRmlsZSI7czoxNjoiaW1nL3Bhc3N3b3JkLnBo
 
 I captured the request to the web page using burpsuite and modified the value of the cookie `drawing` with the cookie that we generated, which responded with an error, indicating successfull execution of code.
 
-<figure><img src="../.gitbook/assets/image (149).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (181).png" alt=""><figcaption></figcaption></figure>
 
 ### Getting the Password
 
 Now, to get the password, check the `img/password.php` file, you can see the credential for the next level.
 
-<figure><img src="../.gitbook/assets/image (150).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (182).png" alt=""><figcaption></figcaption></figure>

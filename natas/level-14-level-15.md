@@ -10,7 +10,7 @@ URL:      http://natas15.natas.labs.overthewire.org
 
 This time we got an input field, which checks whether the given username exists and also we got the link to the source code.
 
-<figure><img src="../.gitbook/assets/image (91).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (123).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -18,7 +18,7 @@ This time we got an input field, which checks whether the given username exists 
 
 Let's take a look at the source code.
 
-<figure><img src="../.gitbook/assets/image (86).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (118).png" alt=""><figcaption></figcaption></figure>
 
 The input field is vulnerable to SQL Injection and also from the source code, we can identify the current database name and table name as `natas15` and `users` respectively.
 
@@ -30,11 +30,11 @@ I first checked whether the SQL injection works by using the same payload that w
 
 <div>
 
-<figure><img src="../.gitbook/assets/image (87).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (119).png" alt=""><figcaption></figcaption></figure>
 
  
 
-<figure><img src="../.gitbook/assets/image (88).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (120).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -42,11 +42,11 @@ Next I just gave `"` as the payload, looking out for clues in error thrown in th
 
 <div>
 
-<figure><img src="../.gitbook/assets/image (89).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (121).png" alt=""><figcaption></figcaption></figure>
 
  
 
-<figure><img src="../.gitbook/assets/image (90).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (122).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -58,11 +58,11 @@ Since, no details were disclosed, we have to check for blind and time based SQL 
 
 <div>
 
-<figure><img src="../.gitbook/assets/image (81).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (113).png" alt="" width="563"><figcaption></figcaption></figure>
 
  
 
-<figure><img src="../.gitbook/assets/image (82).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (114).png" alt="" width="563"><figcaption></figcaption></figure>
 
 </div>
 
@@ -70,10 +70,10 @@ From the results of sqlmap, we can see that the input field is vulnerable to boo
 
 <div>
 
-<figure><img src="../.gitbook/assets/image (84).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (116).png" alt="" width="563"><figcaption></figcaption></figure>
 
  
 
-<figure><img src="../.gitbook/assets/image (85).png" alt="" width="359"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (117).png" alt="" width="359"><figcaption></figcaption></figure>
 
 </div>
